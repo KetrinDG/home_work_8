@@ -1,11 +1,13 @@
 from datetime import date, datetime, timedelta
 
-users = [{'name': 'Bill', 'birthday': '2000-01-14'},
-         {'name': 'Jill', 'birthday': '2001-01-15'},
-         {'name': 'Kim', 'birthday': '1995-01-17'},
-         {'name': 'Jan', 'birthday': '2002-01-18'},
-         {'name': 'Max', 'birthday': '2001-01-24'}
-         ]
+users = [
+    {"name": "Bill", "birthday": "2000-01-14"},
+    {"name": "Jill", "birthday": "2001-01-15"},
+    {"name": "Kim", "birthday": "1995-01-17"},
+    {"name": "Jan", "birthday": "2002-01-18"},
+    {"name": "Max", "birthday": "2001-01-24"},
+]
+
 
 # функция диапазона: определяем дату вывода
 def generate_range_dates(start_date, end_date) -> list:
@@ -32,7 +34,7 @@ def get_birthdays_per_week(users):
 
     # пользователи
     for i in users:
-        bd = datetime.strptime(i['birthday'], '%Y-%m-%d')
+        bd = datetime.strptime(i["birthday"], "%Y-%m-%d")
         cur_bd = bd.replace(year=year_).date()
 
         # если выпадает на выходные и понедельник
@@ -40,11 +42,11 @@ def get_birthdays_per_week(users):
         if cur_bd in date_range:
             if cur_bd.weekday() in (5, 6):
                 cur_bd = get_monday
-        # другой любой день
+            # другой любой день
             if days_dict.get(cur_bd):
-                days_dict[cur_bd].append(i['name'])
+                days_dict[cur_bd].append(i["name"])
             else:
-                days_dict[cur_bd] = [i['name']]
+                days_dict[cur_bd] = [i["name"]]
 
     return days_dict
 
@@ -52,6 +54,6 @@ def get_birthdays_per_week(users):
 birthday_dict = get_birthdays_per_week(users)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     for dt, user in get_birthdays_per_week(users).items():
         print(f'{dt.strftime("%A")} : {",".join(user)}')
